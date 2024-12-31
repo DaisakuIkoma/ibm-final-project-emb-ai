@@ -11,7 +11,7 @@ def sent_analyzer():
     text_to_analyze = request.args.get('textToAnalyze')
 
     if not text_to_analyze:
-        return "Error: No text provided for analysis.", 400
+        return "Invalid text! Please try again!"
 
     # Pass the text to the emotion_detector function and store the response
     response = emotion_detector(text_to_analyze)
@@ -25,8 +25,8 @@ def sent_analyzer():
     dominant_emotion = response['dominant_emotion']
 
     # Handle cases where dominant_emotion is None
-    if dominant_emotion is None:
-        return "Invalid text! Please try again!", 400
+    if response is None:
+        return "Invalid text! Please try again!"
 
     # Return a formatted string with the score and dominant emotion
     return (
